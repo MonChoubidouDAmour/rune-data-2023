@@ -110,7 +110,8 @@ def get_rune_data(api_key):
     rune_games = { 
         "game":[]
     }
-  
+    
+    progress = 0
     for match_id in random_match_ids:
         match_data = get_match_data(api_key, match_id)
         time.sleep(1.2)
@@ -118,7 +119,6 @@ def get_rune_data(api_key):
         global MATCHES_SEARCHED
         MATCHES_SEARCHED+=1
         
-        progress = 0
         message = f"Random Player Progress: {progress}/{10*MATCHES_TO_FETCH}"
         print(message, end='\r')
 
