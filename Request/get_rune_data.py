@@ -4,6 +4,7 @@ import sys
 import random
 import json
 import time
+import string
 
 API_KEY = '<YOUR API>' ###Get your API at https://developer.riotgames.com/
 TIERS = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER"]
@@ -141,15 +142,21 @@ def get_rune_data(api_key):
     message = f"Random Player Progress: {10*MATCHES_TO_FETCH}/{10*MATCHES_TO_FETCH}"
     print(message)
     return rune_games    
+def random_file_name(length):
+    # Define the character set to use for the string
+    characters = string.ascii_letters + string.digits
+    
+    # Generate a random string of the desired length
+    random_string = ''.join(random.choice(characters) for i in range(length))
+    
+    return "rune_data" + random_string + ".json"
 
 if __name__ == "__main__":
     
     
-    filename = "out.json"
-    counter = 1
+    filename =  random_file_name(48)
     while os.path.exists(filename):
-        filename = f"out{counter}.json"
-        counter += 1
+        filename = random_file_name(48)
 
     runeData = get_rune_data(API_KEY)
     with open(filename, 'w') as f:
